@@ -4,7 +4,7 @@ import pandas as pd
 
 from source.oil_database import oil_database
 
-from source.core_functions import select_two_poles
+from source.core_functions import select_poles
 from source.core_functions import calculate_euclidian_distance
 from source.core_functions import calculate_sigma
 from source.core_functions import apply_radial_basis_function_in_database
@@ -30,7 +30,10 @@ df_op = df_op_2
 column_ref = column_ref_2
 
 # Algorithm core
-nbr_of_poles, pole_zero, pole_one = select_two_poles(df_op)
+nbr_of_poles, poles = select_poles(df_op)
+print(nbr_of_poles)
+
+exit(1)
 pole_distance = calculate_euclidian_distance(pole_zero, pole_one)
 sigma = calculate_sigma(nbr_of_poles, pole_distance)
 R = apply_radial_basis_function_in_database(df_op, pole_zero, pole_one, sigma)

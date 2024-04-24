@@ -4,12 +4,12 @@ import pandas as pd
 from .radial_functions import gaussian_function
 from .radial_functions import truth_gaussian_function
 
-def select_two_poles(df_op):
+def select_poles(df_op):
 	pole_size = len(df_op.columns)
+	nbr_of_poles = pole_size
 	pole_zero = np.zeros(pole_size)
 	pole_one = df_op.max().values
-	nbr_of_poles = 2
-	return nbr_of_poles, pole_zero, pole_one
+	return nbr_of_poles, poles
 
 def calculate_euclidian_distance(pole_zero, pole_one):
 	pole_distance = np.linalg.norm(pole_one - pole_zero)**2
