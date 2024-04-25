@@ -26,15 +26,15 @@ column_ref_1, column_ref_2, column_ref_3, column_ref_4 = \
 oil_database(df_1, df_2, df_3, df_4)
 
 # Chose datas to be processed
-df_op = df_op_2
-column_ref = column_ref_2
+df_op = df_op_4
+column_ref = column_ref_4
 
 # Algorithm core
 nbr_of_poles, poles = select_poles(df_op)
-print(nbr_of_poles)
+print(poles)
 
-exit(1)
 pole_distance = calculate_euclidian_distance(pole_zero, pole_one)
+exit(1)
 sigma = calculate_sigma(nbr_of_poles, pole_distance)
 R = apply_radial_basis_function_in_database(df_op, pole_zero, pole_one, sigma)
 R_pseudo_inv = calculate_pseudo_inverse(R)

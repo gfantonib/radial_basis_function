@@ -6,9 +6,10 @@ from .radial_functions import truth_gaussian_function
 
 def select_poles(df_op):
 	pole_size = len(df_op.columns)
-	nbr_of_poles = pole_size
-	pole_zero = np.zeros(pole_size)
-	pole_one = df_op.max().values
+	nbr_of_poles = pole_size + 1
+	poles = df_op.sample(nbr_of_poles)
+	poles = poles.reset_index(drop=True)
+	poles.loc[0] = 0
 	return nbr_of_poles, poles
 
 def calculate_euclidian_distance(pole_zero, pole_one):
