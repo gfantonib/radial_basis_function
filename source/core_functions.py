@@ -4,11 +4,17 @@ import pandas as pd
 from .radial_functions import gaussian_function
 from .radial_functions import truth_gaussian_function
 
+def generate_random_arrays_df(n, m, a, b):
+    arrays = [np.random.uniform(a, b, size=m) for _ in range(n)]
+    df = pd.DataFrame(arrays)
+    return df
+
 def select_poles(df_op):
 	pole_size = len(df_op.columns)
 	nbr_of_poles = pole_size + 1
-	poles = df_op.sample(nbr_of_poles)
-	poles = poles.reset_index(drop=True)
+	max_value = df_op.values.max()
+	min_value = df_op.values.min()
+	poles = generate_random_arrays_df(nbr_of_poles, pole_size, min_value, max_value)
 	poles.loc[0] = 0
 	return nbr_of_poles, poles
 
@@ -23,7 +29,6 @@ def calculate_sigma(nbr_of_poles, pole_distance):
 
 def apply_radial_basis_function_in_database(df_op, nbr_of_poles, poles, sigma):
 	df_main_matrix = df_op.apply(gaussian_function, axis=1, args=(poles, sigma))
-	print(df_main_matrix)
 	df_main_matrix[f"{nbr_of_poles}"] = 1
 	R = df_main_matrix.values
 	return R

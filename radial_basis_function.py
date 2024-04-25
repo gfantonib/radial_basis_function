@@ -26,8 +26,8 @@ column_ref_1, column_ref_2, column_ref_3, column_ref_4 = \
 oil_database(df_1, df_2, df_3, df_4)
 
 # Chose datas to be processed
-df_op = df_op_4
-column_ref = column_ref_4
+df_op = df_op_3
+column_ref = column_ref_3
 
 # Algorithm core
 nbr_of_poles, poles = select_poles(df_op)
