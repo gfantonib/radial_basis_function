@@ -31,12 +31,15 @@ column_ref = column_ref_4
 
 # Algorithm core
 nbr_of_poles, poles = select_poles(df_op)
+
+print(df_op)
 print(poles)
 
-pole_distance = calculate_euclidian_distance(pole_zero, pole_one)
-exit(1)
+pole_distance = calculate_euclidian_distance(poles)
 sigma = calculate_sigma(nbr_of_poles, pole_distance)
-R = apply_radial_basis_function_in_database(df_op, pole_zero, pole_one, sigma)
+R = apply_radial_basis_function_in_database(df_op, poles, sigma)
+print(R)
+exit(1)
 R_pseudo_inv = calculate_pseudo_inverse(R)
 A = transform_column_ref_in_matrix(column_ref)
 a = calculate_radial_basis_function_constants(R_pseudo_inv, A)

@@ -12,16 +12,20 @@ def select_poles(df_op):
 	poles.loc[0] = 0
 	return nbr_of_poles, poles
 
-def calculate_euclidian_distance(pole_zero, pole_one):
-	pole_distance = np.linalg.norm(pole_one - pole_zero)**2
+# How to find the maximum distance?
+def calculate_euclidian_distance(poles):
+	pole_distance = np.linalg.norm(poles.loc[1] - poles.loc[0])**2
 	return pole_distance
 
 def calculate_sigma(nbr_of_poles, pole_distance):
 	sigma = np.sqrt(pole_distance) / np.sqrt(2 * nbr_of_poles)
 	return sigma
 
-def apply_radial_basis_function_in_database(df_op, pole_zero, pole_one, sigma):
-	tuple_series = df_op.apply(gaussian_function, axis=1, args=(pole_zero, pole_one, sigma))
+def apply_radial_basis_function_in_database(df_op, poles, sigma):
+	result = df_op.apply(gaussian_function, axis=1, args=(poles, sigma))
+	print(result)
+	exit(1)
+
 	df_main_matrix = pd.DataFrame(tuple_series.tolist(), columns=['Column 1', 'Column 2'])
 	df_main_matrix["Column 3"] = 1
 	R = df_main_matrix.values
