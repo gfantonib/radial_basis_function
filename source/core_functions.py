@@ -21,13 +21,10 @@ def calculate_sigma(nbr_of_poles, pole_distance):
 	sigma = np.sqrt(pole_distance) / np.sqrt(2 * nbr_of_poles)
 	return sigma
 
-def apply_radial_basis_function_in_database(df_op, poles, sigma):
-	result = df_op.apply(gaussian_function, axis=1, args=(poles, sigma))
-	print(result)
-	exit(1)
-
-	df_main_matrix = pd.DataFrame(tuple_series.tolist(), columns=['Column 1', 'Column 2'])
-	df_main_matrix["Column 3"] = 1
+def apply_radial_basis_function_in_database(df_op, nbr_of_poles, poles, sigma):
+	df_main_matrix = df_op.apply(gaussian_function, axis=1, args=(poles, sigma))
+	print(df_main_matrix)
+	df_main_matrix[f"{nbr_of_poles}"] = 1
 	R = df_main_matrix.values
 	return R
 
@@ -43,6 +40,6 @@ def calculate_radial_basis_function_constants(R_pseudo_inv, A):
 	a = np.dot(R_pseudo_inv, A)
 	return a
 
-def predict_new_values(new_df_op, pole_zero, pole_one, sigma, a):
-	result = new_df_op.apply(truth_gaussian_function, axis=1, args=(pole_zero, pole_one, sigma, a))
+def predict_new_values(new_df_op, nbr_of_poles, poles, sigma, a):
+	result = new_df_op.apply(truth_gaussian_function, axis=1, args=(nbr_of_poles, poles, sigma, a))
 	return result
