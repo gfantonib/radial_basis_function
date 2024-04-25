@@ -1,7 +1,10 @@
 import numpy as np
 import pandas as pd
 
-from .utils import generate_random_arrays_df
+def generate_random_arrays_df(n, m, a, b):
+    arrays = [np.random.uniform(a, b, size=m) for _ in range(n)]
+    df = pd.DataFrame(arrays)
+    return df
 
 def select_poles(df_op):
 	pole_size = len(df_op.columns)
@@ -21,8 +24,12 @@ def calculate_sigma(nbr_of_poles, pole_distance):
 	sigma = np.sqrt(pole_distance) / np.sqrt(2 * nbr_of_poles)
 	return sigma
 
+def put_poles_in_database(row, poles, sigma, radial_function):
+	df_main_matrix = poles.apply(radial_function, axis=1, args=(row, sigma))
+	return df_main_matrix
+
 def apply_radial_basis_function_in_database(df_op, nbr_of_poles, poles, sigma, radial_function):
-	df_main_matrix = df_op.apply(radial_function, axis=1, args=(poles, sigma))
+	df_main_matrix = df_op.apply(put_poles_in_database, axis=1, args=(poles, sigma, radial_function))
 	df_main_matrix[f"{nbr_of_poles}"] = 1
 	R = df_main_matrix.values
 	return R
@@ -39,6 +46,11 @@ def calculate_radial_basis_function_constants(R_pseudo_inv, A):
 	a = np.dot(R_pseudo_inv, A)
 	return a
 
-def predict_new_values(new_df_op, nbr_of_poles, poles, sigma, a, truth_function):
-	result = new_df_op.apply(truth_function, axis=1, args=(nbr_of_poles, poles, sigma, a))
+def predict_line(row, nbr_of_poles, poles, sigma, a, radial_function):
+	result = poles.apply(radial_function, axis=1, args=(row, sigma))
+	df_result = np.dot(result.values, a[:nbr_of_poles]) + a[-1]
+	return df_result
+
+def predict_new_values(new_df_op, nbr_of_poles, poles, sigma, a, radial_function):
+	result = new_df_op.apply(predict_line, axis=1, args=(nbr_of_poles, poles, sigma, a, radial_function))
 	return result

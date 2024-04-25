@@ -1,14 +1,23 @@
 import numpy as np
 
-def distribute_poles(poles_row, data_row, sigma):
+# Gaussian function
+def gaussian_function(poles_row, data_row, sigma):
 	gaussian_line = np.e**(-1/(2*(sigma**2)) * np.linalg.norm(data_row.values - poles_row.values)**2)
 	return gaussian_line
 
-def gaussian_function(row, poles, sigma):
-	df_main_matrix = poles.apply(distribute_poles, axis=1, args=(row, sigma))
-	return df_main_matrix
+# Multiquadratic function
+def multiquadratic_function(poles_row, data_row, sigma):
+	multiquadratic_line = np.sqrt(1 + sigma**2 * np.linalg.norm(data_row.values - poles_row.values)**2)
+	return multiquadratic_line
 
-def truth_gaussian_function(row, nbr_of_poles, poles, sigma, a):
-	result = poles.apply(distribute_poles, axis=1, args=(row, sigma))
-	df_result = np.dot(result.values, a[:nbr_of_poles]) + a[-1]
-	return df_result
+# Versiera function
+def versiera_function(poles_row, data_row, sigma):
+	versiera_line = 1 / (1 + sigma**2 * np.linalg.norm(data_row.values - poles_row.values)**2)
+	return versiera_line
+
+# Reciprocal multiquadratic function
+def reciprocal_multiquadratic_function(poles_row, data_row, sigma):
+	reciprocal_multiquadratic_line = 1 / np.sqrt(1 + sigma**2 * np.linalg.norm(data_row.values - poles_row.values)**2)
+	return reciprocal_multiquadratic_line
+
+
