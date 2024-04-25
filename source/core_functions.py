@@ -4,10 +4,7 @@ import pandas as pd
 from .radial_functions import gaussian_function
 from .radial_functions import truth_gaussian_function
 
-def generate_random_arrays_df(n, m, a, b):
-    arrays = [np.random.uniform(a, b, size=m) for _ in range(n)]
-    df = pd.DataFrame(arrays)
-    return df
+from .utils import generate_random_arrays_df
 
 def select_poles(df_op):
 	pole_size = len(df_op.columns)
