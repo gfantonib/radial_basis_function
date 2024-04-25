@@ -13,6 +13,9 @@ from source.core_functions import transform_column_ref_in_matrix
 from source.core_functions import calculate_radial_basis_function_constants
 from source.core_functions import predict_new_values
 
+from source.radial_functions import gaussian_function
+from source.radial_functions import truth_gaussian_function
+
 # main function
 # Open database
 df_1 = pd.read_excel("data/rbf_data_1.xlsx")
@@ -29,11 +32,15 @@ oil_database(df_1, df_2, df_3, df_4)
 df_op = df_op_3
 column_ref = column_ref_3
 
+# Chose radial function to be used
+radial_function = gaussian_function
+truth_function = truth_gaussian_function
+
 # Algorithm core
 nbr_of_poles, poles = select_poles(df_op)
 pole_distance = calculate_euclidian_distance(poles)
 sigma = calculate_sigma(nbr_of_poles, pole_distance)
-R = apply_radial_basis_function_in_database(df_op, nbr_of_poles, poles, sigma)
+R = apply_radial_basis_function_in_database(df_op, nbr_of_poles, poles, sigma, radial_function)
 R_pseudo_inv = calculate_pseudo_inverse(R)
 A = transform_column_ref_in_matrix(column_ref)
 a = calculate_radial_basis_function_constants(R_pseudo_inv, A)
@@ -42,5 +49,5 @@ a = calculate_radial_basis_function_constants(R_pseudo_inv, A)
 df_op_to_predic = df_op
 
 # Predict data reference
-prediction = predict_new_values(df_op_to_predic, nbr_of_poles, poles, sigma, a)
+prediction = predict_new_values(df_op_to_predic, nbr_of_poles, poles, sigma, a, truth_function)
 print(prediction)
