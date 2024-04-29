@@ -35,3 +35,7 @@ $$
 $$
 
 Understanding the inverse matrix [(see pseudo-inverse deduction)](./pseudo_inverse_deduction.ipynb) is fundamental to grasping the Radial Basis Function algorithm.
+
+---
+
+This implementation is based on lectures by Professor Ricieri from ITA on the topic of Big Data and Machine Learning, presented at the *Museu da Matemática*.
