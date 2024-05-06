@@ -18,7 +18,7 @@ Penrose has contributed to the mathematical physics of general relativity and co
 
 This algorithm leverages the structural characteristics of a radial basis function (such as the Gaussian function) to flexibly model data, transforming it into a new function that captures the underlying data phenomenon.
 
-[Here](https://www.geogebra.org/m/ty36fk8n) is a small demonstration.
+[Here](https://www.geogebra.org/m/ty36fk8n) is a brief demonstration showcasing the flexibility of combining multiple Gaussian functions, with their parameters adjusted, to construct an entirely new function.
 
 In mathematics, and in particular linear algebra, the Moore–Penrose inverse (pseudo-inverse) is the most widely known generalization of the inverse matrix. It was independently described by E. H. Moore in 1920 and Roger Penrose in 1955.
 
