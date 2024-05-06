@@ -16,6 +16,10 @@ Sir Roger Penrose (born 8 August 1931) is a British mathematician, mathematical 
 
 Penrose has contributed to the mathematical physics of general relativity and cosmology. He has received several prizes and awards, including the 1988 Wolf Prize in Physics, which he shared with Stephen Hawking for the Penrose–Hawking singularity theorems, and the 2020 Nobel Prize in Physics "for the discovery that black hole formation is a robust prediction of the general theory of relativity".
 
+This algorithm leverages the structural characteristics of a radial basis function (such as the Gaussian function) to flexibly model data, transforming it into a new function that captures the underlying data phenomenon.
+
+[Here](https://www.geogebra.org/m/ty36fk8n) is a small demonstration.
+
 In mathematics, and in particular linear algebra, the Moore–Penrose inverse (pseudo-inverse) is the most widely known generalization of the inverse matrix. It was independently described by E. H. Moore in 1920 and Roger Penrose in 1955.
 
 $$
