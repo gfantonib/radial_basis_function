@@ -42,4 +42,4 @@ Understanding the inverse matrix [(see pseudo-inverse deduction)](./pseudo_inver
 
 ---
 
-This implementation is based on lectures by Professor Ricieri from ITA on the topic of Big Data and Machine Learning, presented at the *Museu da Matemática*.
+This implementation was inspired by lectures given by Professor Ricieri from ITA on the topic of Big Data and Machine Learning, presented at *Museu da Matemática*.
